@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+      crossorigin
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const Welcome = (prop) => <p>Hello {prop.name}</p>;
+      // 其实这里的 App 就是函数式的组件...组件其实就是将 UI 组合成一个独立、可以复用的块。早前都是通过类方式创建的组件的...等效写法大概是 class Welcome extends React.Component{ render(){ return <div><p>Hello {this.props.name}</p></div>} }
+      const App = () => (
+        <div>
+          <Welcome name='Lavria'></Welcome>
+          <Welcome name='Sakura'></Welcome>
+        </div>
+      );
+      // 组件可以像 HTML 元素那样进行嵌套组合...而且其上的特性将会被收集到 prop 属性中...PS: props 要将之视为只读数据,千万不要修改 props 上的值
+      ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+    </script>
+  </body>
+</html>

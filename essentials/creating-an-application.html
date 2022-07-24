@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+      crossorigin
+    ></script>
+    <!-- 以 CDN 方式使用 react 库:需要 react 核心库、react-dom 渲染、babel.js 解析 JSX 语法 -->
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      // cdn 方式引用 babel.js 时,记得将脚本的 type 设置为 babel 解析...
+      const App = () => (
+        <div>
+          <p>Hello world</p>
+        </div>
+      );
+      ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+      // ReactDOM.createRoot 方法根据传入的 css 选择器将某一元素转换为 React 容器元素 -> 该容器元素有 render 方法:将要渲染的 React 元素传入 render 方法即可以在根元素下渲染出对应的实际 DOM
+    </script>
+  </body>
+</html>

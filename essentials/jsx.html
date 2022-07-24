@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+      crossorigin
+    ></script>
+    <!-- 以 CDN 方式使用 react 库:需要 react 核心库、react-dom 渲染、babel.js 解析 JSX 语法 -->
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      // cdn 方式引用 babel.js 时,记得将脚本的 type 设置为 babel 解析...
+      const name = 'Lavria';
+      const App = () => (
+        <div>
+          <p>Hello {name}</p>
+        </div>
+      );
+      // JSX 是 react 提供的一种可以用 html 格式来表示 React 的虚拟 dom 对象的写法...基本上静态 UI 内容直接按照 html 书写格式书写;动态内容放在 {} 中即可...和 vue 类似,{} 内部仅接受表达式。
+      ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+    </script>
+  </body>
+</html>
