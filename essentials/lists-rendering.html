@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+      crossorigin
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      // 数组数据以列表形式展出 -> 数组通过 map 方法将数据与 JSX 代码组合而成一个 React 元素数组 -> JSX 语法可以将 React 元素数组放在 {} 中解析成同级别的真实 DOM...
+      const numbers = [
+        { value: 1, id: 'one' },
+        { value: 2, id: 'two' },
+        { value: 3, id: 'three' },
+      ];
+      const NumberList = ({ numbers }) => {
+        const listItems = numbers.map((number) => (
+          <li key={number.id}>{number.value}</li>
+        ));
+        // 如果不给列表项指定 key 的值,react 会默认使用数组的索引作为 key 值。PS:理论上数组中使用 key 在同级中应该是唯一的...
+        return <ul>{listItems}</ul>;
+      };
+
+      const App = () => (
+        <div>
+          <NumberList numbers={numbers} />
+        </div>
+      );
+      ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+    </script>
+  </body>
+</html>

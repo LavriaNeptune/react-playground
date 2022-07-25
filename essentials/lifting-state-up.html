@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+      crossorigin
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const TemperatureInput = ({
+        scale,
+        temperature,
+        onTemperatureChange,
+      }) => {
+        const scaleName = scale === 'c' ? 'Celsius' : 'Fahrenheit';
+        return (
+          <fieldset>
+            <legend>Enter temperature in {scaleName}:</legend>
+            <input value={temperature} onChange={onTemperatureChange}></input>
+          </fieldset>
+        );
+      };
+      const BoilingVerdict = ({ celsius }) => {
+        return <p>Water is {celsius >= 100 ? 'boil' : 'not boil'}</p>;
+      };
+      const Calculator = () => {
+        // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 多个组件嵌套时,将公用的状态提升至最顶层组件 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        const [celsius, setCelsius] = React.useState(0);
+        const [fahrenheit, setFahrenheit] = React.useState(0);
+        // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 多个组件嵌套时,将公用的状态提升至最顶层组件 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+        const handleCelsiusChange = (e) => {
+          setCelsius(e.target.value);
+          setFahrenheit((e.target.value * 9) / 5 + 32);
+        };
+        const handleFahrenheitChange = (e) => {
+          setCelsius(((e.target.value - 32) * 5) / 9);
+          setFahrenheit(e.target.value);
+        };
+        return (
+          <div>
+            <TemperatureInput
+              scale='c'
+              temperature={celsius}
+              onTemperatureChange={handleCelsiusChange}
+            />
+            <TemperatureInput
+              scale='f'
+              temperature={fahrenheit}
+              onTemperatureChange={handleFahrenheitChange}
+            />
+            <BoilingVerdict celsius={celsius} />
+          </div>
+        );
+      };
+      const App = () => <Calculator />;
+      ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+    </script>
+  </body>
+</html>
